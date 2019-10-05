@@ -7,7 +7,7 @@ import sys
 class Mandel:
     VIEWPORT = { 'x': (-2.5, 1), 'y': (-1.25, 1.25) }
     #VIEWPORT = { 'x': (-0.1, 0), 'y': (-1.04, -0.96) }
-    WIDTH = 1300
+    WIDTH = 1200
 
     MAX_ITERATIONS = 48
     RAINBOW_GRADIENT_SCALE = 1.0
