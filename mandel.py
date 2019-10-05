@@ -6,11 +6,11 @@ class Mandel:
     COMPLEX_PLANE_VIEWPORT = { 'x': (-2.5, 1), 'y': (-1.25, 1.25) }
     #COMPLEX_PLANE_VIEWPORT = { 'x': (-0.1, 0), 'y': (-1.04, -0.96) }
 
-    WINDOW_WIDTH = 1200
+    CANVAS_WIDTH = 1200
     x_range = COMPLEX_PLANE_VIEWPORT['x'][1] - COMPLEX_PLANE_VIEWPORT['x'][0]
     y_range = COMPLEX_PLANE_VIEWPORT['y'][1] - COMPLEX_PLANE_VIEWPORT['y'][0]
     aspect_ratio = x_range / y_range
-    WINDOW_HEIGHT = int(WINDOW_WIDTH / aspect_ratio)
+    CANVAS_HEIGHT = int(CANVAS_WIDTH / aspect_ratio)
 
     MAX_ITERATIONS = 48
 
@@ -20,10 +20,10 @@ class Mandel:
     def __init__(self):
         self.gradient = self.rainbow_gradient(self.RAINBOW_GRADIENT_SIZE)
         self.progress = 0
-        self.progress_per_tick = int(self.WINDOW_WIDTH * self.WINDOW_HEIGHT / 120)
+        self.progress_per_tick = int(self.CANVAS_WIDTH * self.CANVAS_HEIGHT / 120)
 
     def draw(self):
-        image = Image.new('RGB', (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
+        image = Image.new('RGB', (self.CANVAS_WIDTH, self.CANVAS_HEIGHT))
         draw = ImageDraw.Draw(image)
         self.draw_mandel(draw)
         self.save_image(image)
@@ -49,8 +49,8 @@ class Mandel:
         return self.MAX_ITERATIONS
 
     def for_each_pixel(self):
-        for y in range(0, self.WINDOW_HEIGHT):
-            for x in range(0, self.WINDOW_WIDTH):
+        for y in range(0, self.CANVAS_HEIGHT):
+            for x in range(0, self.CANVAS_WIDTH):
                 yield [x, y]
 
     def show_progress(self):
@@ -61,11 +61,11 @@ class Mandel:
 
     def pixel_to_complex_coordinates(self, x, y):
         x_range = self.COMPLEX_PLANE_VIEWPORT['x'][1] - self.COMPLEX_PLANE_VIEWPORT['x'][0]
-        x_scaling_factor = self.WINDOW_WIDTH / x_range
+        x_scaling_factor = self.CANVAS_WIDTH / x_range
         scaled_x = x / x_scaling_factor + self.COMPLEX_PLANE_VIEWPORT['x'][0]
 
         y_range = self.COMPLEX_PLANE_VIEWPORT['y'][1] - self.COMPLEX_PLANE_VIEWPORT['y'][0]
-        y_scaling_factor = self.WINDOW_HEIGHT / y_range
+        y_scaling_factor = self.CANVAS_HEIGHT / y_range
         scaled_y = y / y_scaling_factor + self.COMPLEX_PLANE_VIEWPORT['y'][0]
 
         return complex(scaled_x, scaled_y)
@@ -105,8 +105,8 @@ class Mandel:
             y1=self.COMPLEX_PLANE_VIEWPORT['y'][1],
             iterations=self.MAX_ITERATIONS,
             gradient=self.RAINBOW_GRADIENT_SIZE,
-            width=self.WINDOW_WIDTH,
-            height=self.WINDOW_HEIGHT)
+            width=self.CANVAS_WIDTH,
+            height=self.CANVAS_HEIGHT)
         image.save(f'screenshots/{filename}.png', 'PNG')
 
 Mandel().draw()
