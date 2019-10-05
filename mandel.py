@@ -39,7 +39,8 @@ class Mandel:
                 progress = 0
 
             mandel_x, mandel_y = self.pixel_to_mandel_point(pixel_x, pixel_y)
-            color = self.colorize(self.iterations_for(mandel_x, mandel_y))
+            num_iterations = self.iterations_for(mandel_x, mandel_y)
+            color = self.colorize(num_iterations)
             draw.point((pixel_x, pixel_y), fill=color)
         print()
 
