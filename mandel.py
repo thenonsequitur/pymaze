@@ -5,16 +5,16 @@ import numpy
 import sys
 
 class Mandel:
-    COMPLEX_PLANE_BOUNDS = { 'x': (-2.5, 1), 'y': (-1.25, 1.25) }
-    #COMPLEX_PLANE_BOUNDS = { 'x': (-0.1, 0), 'y': (-1.04, -0.96) }
+    COMPLEX_PLANE_VIEWPORT = { 'x': (-2.5, 1), 'y': (-1.25, 1.25) }
+    #COMPLEX_PLANE_VIEWPORT = { 'x': (-0.1, 0), 'y': (-1.04, -0.96) }
 
     WINDOW_WIDTH = 1200
 
     MAX_ITERATIONS = 48
     RAINBOW_GRADIENT_SCALE = 1.0
 
-    x_range = COMPLEX_PLANE_BOUNDS['x'][1] - COMPLEX_PLANE_BOUNDS['x'][0]
-    y_range = COMPLEX_PLANE_BOUNDS['y'][1] - COMPLEX_PLANE_BOUNDS['y'][0]
+    x_range = COMPLEX_PLANE_VIEWPORT['x'][1] - COMPLEX_PLANE_VIEWPORT['x'][0]
+    y_range = COMPLEX_PLANE_VIEWPORT['y'][1] - COMPLEX_PLANE_VIEWPORT['y'][0]
     aspect_ratio = x_range / y_range
     WINDOW_HEIGHT = int(WINDOW_WIDTH / aspect_ratio)
 
@@ -60,13 +60,13 @@ class Mandel:
             self.progress = 0
 
     def pixel_to_complex_coordinates(self, x, y):
-        x_range = self.COMPLEX_PLANE_BOUNDS['x'][1] - self.COMPLEX_PLANE_BOUNDS['x'][0]
+        x_range = self.COMPLEX_PLANE_VIEWPORT['x'][1] - self.COMPLEX_PLANE_VIEWPORT['x'][0]
         x_scaling_factor = self.WINDOW_WIDTH / x_range
-        scaled_x = x / x_scaling_factor + self.COMPLEX_PLANE_BOUNDS['x'][0]
+        scaled_x = x / x_scaling_factor + self.COMPLEX_PLANE_VIEWPORT['x'][0]
 
-        y_range = self.COMPLEX_PLANE_BOUNDS['y'][1] - self.COMPLEX_PLANE_BOUNDS['y'][0]
+        y_range = self.COMPLEX_PLANE_VIEWPORT['y'][1] - self.COMPLEX_PLANE_VIEWPORT['y'][0]
         y_scaling_factor = self.WINDOW_HEIGHT / y_range
-        scaled_y = y / y_scaling_factor + self.COMPLEX_PLANE_BOUNDS['y'][0]
+        scaled_y = y / y_scaling_factor + self.COMPLEX_PLANE_VIEWPORT['y'][0]
 
         return scaled_x, scaled_y
 
