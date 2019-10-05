@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "520957df58df63665b9309b3db8069b48d9f3350e99b34f194e263b002d4c8fc"
+            "sha256": "eb1c240844ba608eb9ff3b88d98484cec97dafaadc89ad4d76806b621cec59cb"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,26 +16,6 @@
         ]
     },
     "default": {
-        "arcade": {
-            "hashes": [
-                "sha256:cf5f3f428dabd5927252f9b3e19fa221b6f6fd28a1be050cb641d4cc2941941b"
-            ],
-            "index": "pypi",
-            "version": "==2.1.3"
-        },
-        "attrs": {
-            "hashes": [
-                "sha256:ec20e7a4825331c1b5ebf261d111e16fa9612c1f7a5e1f884f12bd53a664dfd2",
-                "sha256:f913492e1663d3c36f502e5e9ba6cd13cf19d7fab50aa13239e420fef95e1396"
-            ],
-            "version": "==19.2.0"
-        },
-        "future": {
-            "hashes": [
-                "sha256:67045236dcfd6816dc439556d009594abf643e5eb48992e36beac09c2ca659b8"
-            ],
-            "version": "==0.17.1"
-        },
         "numpy": {
             "hashes": [
                 "sha256:05dbfe72684cc14b92568de1bc1f41e5f62b00f714afc9adee42f6311738091f",
@@ -87,30 +67,8 @@
                 "sha256:f1baa54d50ec031d1a9beb89974108f8f2c0706f49798f4777df879df0e1adb6",
                 "sha256:f53a5385932cda1e2c862d89460992911a89768c65d176ff8c50cddca4d29bed"
             ],
+            "index": "pypi",
             "version": "==6.2.0"
-        },
-        "pyglet": {
-            "hashes": [
-                "sha256:08353c549b7f26d5815cc2e9360a85e4e0d80e6a67962e18df0255b00cb529ab",
-                "sha256:40ed3c10b970b2341e4e0eec208d38f2f50684e68f6d60082e0374c587f37585"
-            ],
-            "version": "==1.4.4"
-        },
-        "pyglet-ffmpeg2": {
-            "hashes": [
-                "sha256:164f31a5eac5bfe0213fad2abbbc1c0c878a561bb0d5ebea259827c06f3f2007",
-                "sha256:1eaf136c0321ceec58b0487d5af226fb698cc92cbff808873f871b48c70c3b9e",
-                "sha256:21fc6b640d14a50ce9923254966462cb26758436679d74020cf09c92501d2d85",
-                "sha256:5ca02a02bc81b790670a92b28a6c2d38873cff78a3e6a2eb24cd152f13c820ad",
-                "sha256:f6bc66313faa0daa914df575ed8cf0c31cf4af00ea69237d28edad3ee5149f82"
-            ],
-            "version": "==0.1.15"
-        },
-        "pytiled-parser": {
-            "hashes": [
-                "sha256:7327854bc56bcaeef677044a5ec5026db7e5ec48681769c37444abbb9d27855d"
-            ],
-            "version": "==0.9.0"
         }
     },
     "develop": {}

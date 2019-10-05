@@ -1,30 +1,32 @@
 #!/usr/bin/env python
 
-import arcade
+from PIL import Image, ImageDraw
 import numpy
-import time
+import sys
 
 class Mandel:
-    WIDTH, HEIGHT = (900, 600)
-    VIEWPORT = { 'x': (-2.3, 1.2), 'y': (-1.6, 1.4) }
+    VIEWPORT = { 'x': (-2.5, 1), 'y': (-1.25, 1.25) }
+    WIDTH = 500
 
-    MAX_ITERATIONS = 12
-    RAINBOW_GRADIENT_SCALE = 12
+    MAX_ITERATIONS = 36
+    RAINBOW_GRADIENT_SCALE = 36
+
+    viewport_width = VIEWPORT['x'][1] - VIEWPORT['x'][0]
+    viewport_height = VIEWPORT['y'][1] - VIEWPORT['y'][0]
+    aspect_ratio = viewport_width / viewport_height
+    HEIGHT = int(WIDTH / aspect_ratio)
 
     def __init__(self):
         self.gradient = self.rainbow_gradient(self.RAINBOW_GRADIENT_SCALE)
 
     def draw(self):
-        arcade.open_window(self.WIDTH, self.HEIGHT, "Mandelbrot")
-        arcade.set_background_color([30, 30, 30])
-        arcade.start_render()
+        image = Image.new('RGB', (self.WIDTH, self.HEIGHT))
+        draw = ImageDraw.Draw(image)
+        self.draw_mandel(draw)
+        image.show()
+        #image.save(sys.stdout, 'PNG')
 
-        self.draw_mandel()
-
-        arcade.finish_render()
-        arcade.run()
-
-    def draw_mandel(self):
+    def draw_mandel(self, draw):
         progress = 0
         tick_size = int(self.WIDTH * self.HEIGHT / 120)
         for pixel_x, pixel_y in self.for_each_pixel():
@@ -35,7 +37,7 @@ class Mandel:
 
             mandel_x, mandel_y = self.pixel_to_mandel_point(pixel_x, pixel_y)
             color = self.colorize(self.iterations_for(mandel_x, mandel_y))
-            arcade.draw_point(pixel_x, pixel_y, color, 10)
+            draw.point((pixel_x, pixel_y), fill=color)
         print()
 
     def iterations_for(self, x_offset, y_offset):
