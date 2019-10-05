@@ -33,24 +33,20 @@ class Mandel:
     def draw_mandel(self, draw):
         for pixel_x, pixel_y in self.for_each_pixel():
             self.show_progress()
-            complex_x, complex_y = self.pixel_to_complex_coordinates(pixel_x, pixel_y)
-            num_iterations = self.count_iterations_at_point(complex_x, complex_y)
+            complex_coords = self.pixel_to_complex_coordinates(pixel_x, pixel_y)
+            num_iterations = self.count_iterations_at_coords(complex_coords)
             color = self.colorize(num_iterations)
             draw.point((pixel_x, pixel_y), fill=color)
         print()
 
-    # recursive function, z[n] = z[n-1]^2 + C, with z[0] = 0
+    # recursive function, z[n] = z[n-1]^2 + C, with z[0] = 0 + 0i (i.e. origin of the complex plan)
     # z is a complex number with real component x and imaginary component y
     # the constant we add each iteration, C, corresponds to the point we are plotting
-    def count_iterations_at_point(self, complex_x, complex_y):
-        # Always start at the origin
-        x, y = (0, 0)
+    def count_iterations_at_coords(self, complex_coords):
+        z = complex(0, 0)
         for i in range(0, self.MAX_ITERATIONS):
-            # To square a complex number, do an algebraic expanstion:
-            # (x + yi)(x + yi) => x^2 + 2xyi + (yi)^2 => x^2 + 2xyi + (y^2)(i^2) => x^2 + 2xyi - y^2=> (x^2 - y^2) + (2xy)i
-            x, y = x * x - y * y + complex_x, 2 * x * y + complex_y
-            # If the distance from the origin is more than 4, we know by proof that the sequence will not converge
-            if x * x + y * y > 2 * 2: return i
+            if abs(z) > 2: return i
+            z = z * z + complex_coords
         return self.MAX_ITERATIONS
 
     def for_each_pixel(self):
@@ -73,7 +69,7 @@ class Mandel:
         y_scaling_factor = self.WINDOW_HEIGHT / y_range
         scaled_y = y / y_scaling_factor + self.COMPLEX_PLANE_VIEWPORT['y'][0]
 
-        return scaled_x, scaled_y
+        return complex(scaled_x, scaled_y)
 
     def colorize(self, iterations):
         color = self.gradient[iterations % self.RAINBOW_GRADIENT_SIZE]
