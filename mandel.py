@@ -5,11 +5,11 @@ import numpy
 import time
 
 class Mandel:
-    WIDTH, HEIGHT = (1000, 500)
+    WIDTH, HEIGHT = (900, 600)
+    VIEWPORT = { 'x': (-2.3, 1.2), 'y': (-1.6, 1.4) }
+
     MAX_ITERATIONS = 12
     RAINBOW_GRADIENT_SCALE = 12
-
-    MANDELBROT_SCALE = { 'x': (-2.3, 1.2), 'y': (-1.6, 1.4) }
 
     def __init__(self):
         self.gradient = self.rainbow_gradient(self.RAINBOW_GRADIENT_SCALE)
@@ -33,7 +33,7 @@ class Mandel:
                 print('.', end='', flush=True)
                 progress = 0
 
-            mandel_x, mandel_y = self.pixel_to_mandelbrot_scale(pixel_x, pixel_y)
+            mandel_x, mandel_y = self.pixel_to_mandel_point(pixel_x, pixel_y)
             color = self.colorize(self.iterations_for(mandel_x, mandel_y))
             arcade.draw_point(pixel_x, pixel_y, color, 10)
         print()
@@ -50,14 +50,14 @@ class Mandel:
             for x in range(0, self.WIDTH):
                 yield [x, y]
 
-    def pixel_to_mandelbrot_scale(self, x, y):
-        x_range = self.MANDELBROT_SCALE['x'][1] - self.MANDELBROT_SCALE['x'][0]
+    def pixel_to_mandel_point(self, x, y):
+        x_range = self.VIEWPORT['x'][1] - self.VIEWPORT['x'][0]
         x_scaling_factor = self.WIDTH / x_range
-        scaled_x = x / x_scaling_factor + self.MANDELBROT_SCALE['x'][0]
+        scaled_x = x / x_scaling_factor + self.VIEWPORT['x'][0]
 
-        y_range = self.MANDELBROT_SCALE['y'][1] - self.MANDELBROT_SCALE['y'][0]
+        y_range = self.VIEWPORT['y'][1] - self.VIEWPORT['y'][0]
         y_scaling_factor = self.HEIGHT / y_range
-        scaled_y = y / y_scaling_factor + self.MANDELBROT_SCALE['y'][0]
+        scaled_y = y / y_scaling_factor + self.VIEWPORT['y'][0]
 
         return scaled_x, scaled_y
 
