@@ -6,18 +6,21 @@ import sys
 
 class Mandel:
     VIEWPORT = { 'x': (-2.5, 1), 'y': (-1.25, 1.25) }
-    WIDTH = 500
+    #VIEWPORT = { 'x': (-0.1, 0), 'y': (-1.04, -0.96) }
+    WIDTH = 1300
 
-    MAX_ITERATIONS = 36
-    RAINBOW_GRADIENT_SCALE = 36
+    MAX_ITERATIONS = 48
+    RAINBOW_GRADIENT_SCALE = 1.0
 
     viewport_width = VIEWPORT['x'][1] - VIEWPORT['x'][0]
     viewport_height = VIEWPORT['y'][1] - VIEWPORT['y'][0]
     aspect_ratio = viewport_width / viewport_height
     HEIGHT = int(WIDTH / aspect_ratio)
 
+    RAINBOW_GRADIENT_SIZE = int(RAINBOW_GRADIENT_SCALE * MAX_ITERATIONS)
+
     def __init__(self):
-        self.gradient = self.rainbow_gradient(self.RAINBOW_GRADIENT_SCALE)
+        self.gradient = self.rainbow_gradient(self.RAINBOW_GRADIENT_SIZE)
 
     def draw(self):
         image = Image.new('RGB', (self.WIDTH, self.HEIGHT))
@@ -64,7 +67,7 @@ class Mandel:
         return scaled_x, scaled_y
 
     def colorize(self, iterations):
-        color = self.gradient[iterations % self.RAINBOW_GRADIENT_SCALE]
+        color = self.gradient[iterations % self.RAINBOW_GRADIENT_SIZE]
         intensity = 0 if iterations == self.MAX_ITERATIONS else iterations / self.MAX_ITERATIONS
         return (int(color[0] * intensity), int(color[1] * intensity), int(color[2] * intensity))
 
