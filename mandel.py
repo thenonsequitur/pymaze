@@ -5,11 +5,11 @@ import numpy
 import time
 
 class Mandel:
-    WIDTH, HEIGHT = (800, 400)
+    WIDTH, HEIGHT = (1000, 500)
     MAX_ITERATIONS = 12
     RAINBOW_GRADIENT_SCALE = 12
 
-    MANDELBROT_SCALE = { 'x': (-2.5, 1), 'y': (-1, 1) }
+    MANDELBROT_SCALE = { 'x': (-2.3, 1.2), 'y': (-1.6, 1.4) }
 
     def __init__(self):
         self.gradient = self.rainbow_gradient(self.RAINBOW_GRADIENT_SCALE)
