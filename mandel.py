@@ -26,8 +26,8 @@ class Mandel:
         image = Image.new('RGB', (self.WIDTH, self.HEIGHT))
         draw = ImageDraw.Draw(image)
         self.draw_mandel(draw)
+        #image.save('screenshots/...', 'PNG')
         image.show()
-        #image.save(sys.stdout, 'PNG')
 
     def draw_mandel(self, draw):
         progress = 0
