@@ -31,11 +31,11 @@ class Mandel:
     def draw_mandel(self, image):
         draw = ImageDraw.Draw(image)
         for pixel_x, pixel_y in self.for_each_pixel():
-            self.show_progress()
             complex_coords = self.pixel_to_complex_coordinates(pixel_x, pixel_y)
             num_iterations = self.count_iterations_at_coords(complex_coords)
             color = self.colorize(num_iterations)
             draw.point((pixel_x, pixel_y), fill=color)
+            self.show_progress()
         print()
 
     # recursive function, z[n] = z[n-1]^2 + C, with z[0] = 0 + 0i (i.e. origin of the complex plan)
