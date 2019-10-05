@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 from PIL import Image, ImageDraw
-import numpy
 
 class Mandel:
     COMPLEX_PLANE_VIEWPORT = { 'x': (-2.5, 1), 'y': (-1.25, 1.25) }
@@ -78,7 +77,7 @@ class Mandel:
 
     def rainbow_gradient(self, full_scale):
         if (full_scale % 12 != 0): raise Exception("full_scale must be a multple of 12")
-        colors = numpy.empty(full_scale, dtype=object)
+        colors = [None] * full_scale
 
         # Define the bottom edge of each section of the gradient
         red_max_blue_increasing = int(full_scale * 0 / 6)
