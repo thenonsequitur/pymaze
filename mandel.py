@@ -9,15 +9,14 @@ class Mandel:
     #COMPLEX_PLANE_VIEWPORT = { 'x': (-0.1, 0), 'y': (-1.04, -0.96) }
 
     WINDOW_WIDTH = 1200
-
-    MAX_ITERATIONS = 48
-    RAINBOW_GRADIENT_SCALE = 1.0
-
     x_range = COMPLEX_PLANE_VIEWPORT['x'][1] - COMPLEX_PLANE_VIEWPORT['x'][0]
     y_range = COMPLEX_PLANE_VIEWPORT['y'][1] - COMPLEX_PLANE_VIEWPORT['y'][0]
     aspect_ratio = x_range / y_range
     WINDOW_HEIGHT = int(WINDOW_WIDTH / aspect_ratio)
 
+    MAX_ITERATIONS = 48
+
+    RAINBOW_GRADIENT_SCALE = 1.0
     RAINBOW_GRADIENT_SIZE = int(RAINBOW_GRADIENT_SCALE * MAX_ITERATIONS)
 
     def __init__(self):
