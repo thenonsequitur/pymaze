@@ -2,7 +2,6 @@
 
 from PIL import Image, ImageDraw
 import numpy
-import sys
 
 class Mandel:
     COMPLEX_PLANE_VIEWPORT = { 'x': (-2.5, 1), 'y': (-1.25, 1.25) }
@@ -40,10 +39,17 @@ class Mandel:
             draw.point((pixel_x, pixel_y), fill=color)
         print()
 
-    def count_iterations_at_point(self, x_offset, y_offset):
+    # recursive function, z[n] = z[n-1]^2 + C, with z[0] = 0
+    # z is a complex number with real component x and imaginary component y
+    # the constant we add each iteration, C, corresponds to the point we are plotting
+    def count_iterations_at_point(self, complex_x, complex_y):
+        # Always start at the origin
         x, y = (0, 0)
         for i in range(0, self.MAX_ITERATIONS):
-            x, y = x * x - y * y + x_offset, 2 * x * y + y_offset
+            # To square a complex number, do an algebraic expanstion:
+            # (x + yi)(x + yi) => x^2 + 2xyi + (yi)^2 => x^2 + 2xyi + (y^2)(i^2) => x^2 + 2xyi - y^2=> (x^2 - y^2) + (2xy)i
+            x, y = x * x - y * y + complex_x, 2 * x * y + complex_y
+            # If the distance from the origin is more than 4, we know by proof that the sequence will not converge
             if x * x + y * y > 2 * 2: return i
         return self.MAX_ITERATIONS
 
