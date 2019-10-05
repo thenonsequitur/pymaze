@@ -62,13 +62,13 @@ class Mandel:
     def pixel_to_complex_coordinates(self, x, y):
         x_range = self.COMPLEX_PLANE_VIEWPORT['x'][1] - self.COMPLEX_PLANE_VIEWPORT['x'][0]
         x_scaling_factor = self.CANVAS_WIDTH / x_range
-        scaled_x = x / x_scaling_factor + self.COMPLEX_PLANE_VIEWPORT['x'][0]
+        real = x / x_scaling_factor + self.COMPLEX_PLANE_VIEWPORT['x'][0]
 
         y_range = self.COMPLEX_PLANE_VIEWPORT['y'][1] - self.COMPLEX_PLANE_VIEWPORT['y'][0]
         y_scaling_factor = self.CANVAS_HEIGHT / y_range
-        scaled_y = y / y_scaling_factor + self.COMPLEX_PLANE_VIEWPORT['y'][0]
+        imag = y / y_scaling_factor + self.COMPLEX_PLANE_VIEWPORT['y'][0]
 
-        return complex(scaled_x, scaled_y)
+        return complex(real, imag)
 
     def colorize(self, iterations):
         color = self.gradient[iterations % self.RAINBOW_GRADIENT_SIZE]
