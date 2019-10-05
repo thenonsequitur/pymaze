@@ -35,12 +35,12 @@ class Mandel:
         for pixel_x, pixel_y in self.for_each_pixel():
             self.show_progress()
             complex_x, complex_y = self.pixel_to_complex_coordinates(pixel_x, pixel_y)
-            num_iterations = self.iterations_for(complex_x, complex_y)
+            num_iterations = self.count_iterations_at_point(complex_x, complex_y)
             color = self.colorize(num_iterations)
             draw.point((pixel_x, pixel_y), fill=color)
         print()
 
-    def iterations_for(self, x_offset, y_offset):
+    def count_iterations_at_point(self, x_offset, y_offset):
         x, y = (0, 0)
         for i in range(0, self.MAX_ITERATIONS):
             x, y = x * x - y * y + x_offset, 2 * x * y + y_offset
