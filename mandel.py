@@ -28,7 +28,7 @@ class Mandel:
         image = Image.new('RGB', (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
         draw = ImageDraw.Draw(image)
         self.draw_mandel(draw)
-        #image.save('screenshots/...', 'PNG')
+        self.save_image(image)
         image.show()
 
     def draw_mandel(self, draw):
@@ -95,5 +95,17 @@ class Mandel:
         for i in range(0, scale): colors[red_max_green_decreasing + i] = (255, int((1 - i / scale) * 255), 0)
 
         return colors
+
+    def save_image(self, image):
+        filename = "mandel-{x0},{y0}_{x1},{y1}_{iterations}_{gradient}_{width}x{height}".format(
+            x0=self.COMPLEX_PLANE_VIEWPORT['x'][0],
+            y0=self.COMPLEX_PLANE_VIEWPORT['y'][0],
+            x1=self.COMPLEX_PLANE_VIEWPORT['x'][1],
+            y1=self.COMPLEX_PLANE_VIEWPORT['y'][1],
+            iterations=self.MAX_ITERATIONS,
+            gradient=self.RAINBOW_GRADIENT_SIZE,
+            width=self.WINDOW_WIDTH,
+            height=self.WINDOW_HEIGHT)
+        image.save(f'screenshots/{filename}.png', 'PNG')
 
 Mandel().draw()
