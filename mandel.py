@@ -24,12 +24,12 @@ class Mandel:
 
     def draw(self):
         image = Image.new('RGB', (self.CANVAS_WIDTH, self.CANVAS_HEIGHT))
-        draw = ImageDraw.Draw(image)
-        self.draw_mandel(draw)
+        self.draw_mandel(image)
         self.save_image(image)
         image.show()
 
-    def draw_mandel(self, draw):
+    def draw_mandel(self, image):
+        draw = ImageDraw.Draw(image)
         for pixel_x, pixel_y in self.for_each_pixel():
             self.show_progress()
             complex_coords = self.pixel_to_complex_coordinates(pixel_x, pixel_y)
