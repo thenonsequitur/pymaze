@@ -38,8 +38,8 @@ class Mandel:
                 print('.', end='', flush=True)
                 progress = 0
 
-            mandel_x, mandel_y = self.pixel_to_mandel_point(pixel_x, pixel_y)
-            num_iterations = self.iterations_for(mandel_x, mandel_y)
+            complex_x, complex_y = self.pixel_to_complex_coordinates(pixel_x, pixel_y)
+            num_iterations = self.iterations_for(complex_x, complex_y)
             color = self.colorize(num_iterations)
             draw.point((pixel_x, pixel_y), fill=color)
         print()
@@ -56,7 +56,7 @@ class Mandel:
             for x in range(0, self.WIDTH):
                 yield [x, y]
 
-    def pixel_to_mandel_point(self, x, y):
+    def pixel_to_complex_coordinates(self, x, y):
         x_range = self.VIEWPORT['x'][1] - self.VIEWPORT['x'][0]
         x_scaling_factor = self.WIDTH / x_range
         scaled_x = x / x_scaling_factor + self.VIEWPORT['x'][0]
