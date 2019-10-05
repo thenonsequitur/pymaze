@@ -5,27 +5,28 @@ import numpy
 import sys
 
 class Mandel:
-    VIEWPORT = { 'x': (-2.5, 1), 'y': (-1.25, 1.25) }
-    #VIEWPORT = { 'x': (-0.1, 0), 'y': (-1.04, -0.96) }
-    WIDTH = 1200
+    COMPLEX_PLANE_BOUNDS = { 'x': (-2.5, 1), 'y': (-1.25, 1.25) }
+    #COMPLEX_PLANE_BOUNDS = { 'x': (-0.1, 0), 'y': (-1.04, -0.96) }
+
+    WINDOW_WIDTH = 1200
 
     MAX_ITERATIONS = 48
     RAINBOW_GRADIENT_SCALE = 1.0
 
-    viewport_width = VIEWPORT['x'][1] - VIEWPORT['x'][0]
-    viewport_height = VIEWPORT['y'][1] - VIEWPORT['y'][0]
-    aspect_ratio = viewport_width / viewport_height
-    HEIGHT = int(WIDTH / aspect_ratio)
+    x_range = COMPLEX_PLANE_BOUNDS['x'][1] - COMPLEX_PLANE_BOUNDS['x'][0]
+    y_range = COMPLEX_PLANE_BOUNDS['y'][1] - COMPLEX_PLANE_BOUNDS['y'][0]
+    aspect_ratio = x_range / y_range
+    WINDOW_HEIGHT = int(WINDOW_WIDTH / aspect_ratio)
 
     RAINBOW_GRADIENT_SIZE = int(RAINBOW_GRADIENT_SCALE * MAX_ITERATIONS)
 
     def __init__(self):
         self.gradient = self.rainbow_gradient(self.RAINBOW_GRADIENT_SIZE)
         self.progress = 0
-        self.progress_per_tick = int(self.WIDTH * self.HEIGHT / 120)
+        self.progress_per_tick = int(self.WINDOW_WIDTH * self.WINDOW_HEIGHT / 120)
 
     def draw(self):
-        image = Image.new('RGB', (self.WIDTH, self.HEIGHT))
+        image = Image.new('RGB', (self.WINDOW_WIDTH, self.WINDOW_HEIGHT))
         draw = ImageDraw.Draw(image)
         self.draw_mandel(draw)
         #image.save('screenshots/...', 'PNG')
@@ -48,8 +49,8 @@ class Mandel:
         return self.MAX_ITERATIONS
 
     def for_each_pixel(self):
-        for y in range(0, self.HEIGHT):
-            for x in range(0, self.WIDTH):
+        for y in range(0, self.WINDOW_HEIGHT):
+            for x in range(0, self.WINDOW_WIDTH):
                 yield [x, y]
 
     def show_progress(self):
@@ -59,13 +60,13 @@ class Mandel:
             self.progress = 0
 
     def pixel_to_complex_coordinates(self, x, y):
-        x_range = self.VIEWPORT['x'][1] - self.VIEWPORT['x'][0]
-        x_scaling_factor = self.WIDTH / x_range
-        scaled_x = x / x_scaling_factor + self.VIEWPORT['x'][0]
+        x_range = self.COMPLEX_PLANE_BOUNDS['x'][1] - self.COMPLEX_PLANE_BOUNDS['x'][0]
+        x_scaling_factor = self.WINDOW_WIDTH / x_range
+        scaled_x = x / x_scaling_factor + self.COMPLEX_PLANE_BOUNDS['x'][0]
 
-        y_range = self.VIEWPORT['y'][1] - self.VIEWPORT['y'][0]
-        y_scaling_factor = self.HEIGHT / y_range
-        scaled_y = y / y_scaling_factor + self.VIEWPORT['y'][0]
+        y_range = self.COMPLEX_PLANE_BOUNDS['y'][1] - self.COMPLEX_PLANE_BOUNDS['y'][0]
+        y_scaling_factor = self.WINDOW_HEIGHT / y_range
+        scaled_y = y / y_scaling_factor + self.COMPLEX_PLANE_BOUNDS['y'][0]
 
         return scaled_x, scaled_y
 
