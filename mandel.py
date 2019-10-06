@@ -40,7 +40,6 @@ class Mandel:
         print()
 
     # recursive function, z[n] = z[n-1]^2 + C, with z[0] = 0 + 0i (i.e. origin of the complex plan)
-    # z is a complex number with real component x and imaginary component y
     # the constant we add each iteration, C, corresponds to the point we are plotting
     def calculate_escape_iterations(self, complex_coordinates):
         z = complex(0, 0)
