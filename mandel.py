@@ -20,7 +20,7 @@ class Mandel:
     def __init__(self):
         self.gradient = self.rainbow_gradient()
         self.progress = 0
-        self.progress_per_tick = int(self.CANVAS_HEIGHT / 120)
+        self.progress_per_tick = int(self.CANVAS_HEIGHT / 20)
 
     def draw(self):
         image = Image.new('RGB', (self.CANVAS_WIDTH, self.CANVAS_HEIGHT))
