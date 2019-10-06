@@ -32,9 +32,9 @@ class Mandel:
         draw = ImageDraw.Draw(image)
         for pixel_y in range(0, self.CANVAS_HEIGHT):
             for pixel_x in range(0, self.CANVAS_WIDTH):
-                complex_coords = self.pixel_to_complex_coordinates(pixel_x, pixel_y)
-                num_iterations = self.count_iterations_at_coords(complex_coords)
-                color = self.colorize(num_iterations)
+                complex_coordinates = self.pixel_to_complex_coordinates(pixel_x, pixel_y)
+                escape_iterations = self.calculate_escape_iterations(complex_coordinates)
+                color = self.colorize(escape_iterations)
                 draw.point((pixel_x, pixel_y), fill=color)
             self.show_progress()
         print()
@@ -42,11 +42,11 @@ class Mandel:
     # recursive function, z[n] = z[n-1]^2 + C, with z[0] = 0 + 0i (i.e. origin of the complex plan)
     # z is a complex number with real component x and imaginary component y
     # the constant we add each iteration, C, corresponds to the point we are plotting
-    def count_iterations_at_coords(self, complex_coords):
+    def calculate_escape_iterations(self, complex_coordinates):
         z = complex(0, 0)
         for i in range(0, self.MAX_ITERATIONS):
             if abs(z) > 2: return i
-            z = z * z + complex_coords
+            z = z * z + complex_coordinates
         return 0
 
     def show_progress(self):
@@ -66,9 +66,9 @@ class Mandel:
 
         return complex(real, imag)
 
-    def colorize(self, iterations):
-        color = self.gradient[iterations % self.RAINBOW_GRADIENT_SIZE]
-        intensity = iterations / self.MAX_ITERATIONS
+    def colorize(self, escape_iterations):
+        color = self.gradient[escape_iterations % self.RAINBOW_GRADIENT_SIZE]
+        intensity = escape_iterations / self.MAX_ITERATIONS
         return (int(color[0] * intensity), int(color[1] * intensity), int(color[2] * intensity))
 
     def rainbow_gradient(self, full_scale):
