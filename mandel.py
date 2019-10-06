@@ -46,7 +46,7 @@ class Mandel:
         for i in range(0, self.MAX_ITERATIONS):
             if abs(z) > 2: return i
             z = z * z + complex_coords
-        return self.MAX_ITERATIONS
+        return 0
 
     def for_each_pixel(self):
         for y in range(0, self.CANVAS_HEIGHT):
@@ -72,7 +72,7 @@ class Mandel:
 
     def colorize(self, iterations):
         color = self.gradient[iterations % self.RAINBOW_GRADIENT_SIZE]
-        intensity = 0 if iterations == self.MAX_ITERATIONS else iterations / self.MAX_ITERATIONS
+        intensity = iterations / self.MAX_ITERATIONS
         return (int(color[0] * intensity), int(color[1] * intensity), int(color[2] * intensity))
 
     def rainbow_gradient(self, full_scale):
