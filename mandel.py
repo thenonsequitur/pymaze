@@ -20,7 +20,7 @@ class Mandel:
     def __init__(self):
         self.gradient = self.rainbow_gradient(self.RAINBOW_GRADIENT_SIZE)
         self.progress = 0
-        self.progress_per_tick = int(self.CANVAS_WIDTH * self.CANVAS_HEIGHT / 120)
+        self.progress_per_tick = int(self.CANVAS_HEIGHT / 120)
 
     def draw(self):
         image = Image.new('RGB', (self.CANVAS_WIDTH, self.CANVAS_HEIGHT))
@@ -30,11 +30,12 @@ class Mandel:
 
     def draw_mandel(self, image):
         draw = ImageDraw.Draw(image)
-        for pixel_x, pixel_y in self.for_each_pixel():
-            complex_coords = self.pixel_to_complex_coordinates(pixel_x, pixel_y)
-            num_iterations = self.count_iterations_at_coords(complex_coords)
-            color = self.colorize(num_iterations)
-            draw.point((pixel_x, pixel_y), fill=color)
+        for pixel_y in range(0, self.CANVAS_HEIGHT):
+            for pixel_x in range(0, self.CANVAS_WIDTH):
+                complex_coords = self.pixel_to_complex_coordinates(pixel_x, pixel_y)
+                num_iterations = self.count_iterations_at_coords(complex_coords)
+                color = self.colorize(num_iterations)
+                draw.point((pixel_x, pixel_y), fill=color)
             self.show_progress()
         print()
 
@@ -47,11 +48,6 @@ class Mandel:
             if abs(z) > 2: return i
             z = z * z + complex_coords
         return 0
-
-    def for_each_pixel(self):
-        for y in range(0, self.CANVAS_HEIGHT):
-            for x in range(0, self.CANVAS_WIDTH):
-                yield [x, y]
 
     def show_progress(self):
         self.progress = self.progress + 1
