@@ -6,11 +6,14 @@ class Mandel:
     VIEWPORT = { 'left': -2.5, 'top': -1.25, 'right': 1, 'bottom': 1.25 }
     #VIEWPORT = { 'left': -0.1, 'top': -1.04, 'right': 0, 'bottom': -0.96 }
     #VIEWPORT = { 'left': -0.7513, 'top': 0.1052, 'right': -0.7413, 'bottom': 0.1152 }
-    ESCAPE_DEPTH = 1000
+    #VIEWPORT = { 'left': -0.7494, 'top': 0.0986, 'right': -0.7466, 'bottom': 0.1014 }
+    #VIEWPORT = { 'left': -0.745458, 'top': 0.112979, 'right': -0.745398, 'bottom': 0.113039 }
+
+    ESCAPE_DEPTH = 50
 
     CANVAS_HEIGHT = 900
-    aspect_ratio = (VIEWPORT['bottom'] - VIEWPORT['top']) / (VIEWPORT['right'] - VIEWPORT['left'])
-    CANVAS_WIDTH = int(CANVAS_HEIGHT / aspect_ratio)
+    aspect_ratio = (VIEWPORT['right'] - VIEWPORT['left']) / (VIEWPORT['bottom'] - VIEWPORT['top'])
+    CANVAS_WIDTH = int(CANVAS_HEIGHT * aspect_ratio)
 
     GRADIENT_SCALE = 960
 
